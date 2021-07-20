@@ -1,31 +1,32 @@
-const HttpResponse = require('../helpers/http-response')
+const HttpResponse = require("../helpers/http-response");
+const MissingParamError = require("../helpers/missing-param-error");
 
 module.exports = class LoginRouter {
-  constructor (authUseCase) {
-    this.authUseCase = authUseCase
+  constructor(authUseCase) {
+    this.authUseCase = authUseCase;
   }
 
-  async route (httpRequest) {
+  async route(httpRequest) {
     try {
-      const { email, password } = httpRequest.body
+      const { email, password } = httpRequest.body;
 
       if (!email) {
-        return HttpResponse.badRequest('email')
-    }
+        return HttpResponse.badRequest(new MissingParamError("email"));
+      }
 
       if (!password) {
-        return HttpResponse.badRequest('password')
-    }
+        return HttpResponse.badRequest(new MissingParamError("password"));
+      }
 
-      const accessToken = await this.authUseCase.auth(email, password)
+      const accessToken = await this.authUseCase.auth(email, password);
 
-      if(!accessToken) {
-        return HttpResponse.unauthorizedError()
-    }
+      if (!accessToken) {
+        return HttpResponse.unauthorizedError();
+      }
 
-      return HttpResponse.ok({ accessToken })
+      return HttpResponse.ok({ accessToken });
     } catch (error) {
-      return HttpResponse.serverError()
-    } 
+      return HttpResponse.serverError();
+    }
   }
-}
+};
