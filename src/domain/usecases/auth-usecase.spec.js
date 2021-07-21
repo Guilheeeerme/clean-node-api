@@ -55,7 +55,7 @@ describe("Auth UseCase", () => {
     const { sut } = makeSut();
     const promise = sut.auth("any_email@mail.com");
 
-    expect(promise).rejects.toThrow(new MissingParamError("password"));
+    await expect(promise).rejects.toThrow(new MissingParamError("password"));
   });
 
   test("Should call LoadUserByEmailRepository with correct email", async () => {
@@ -71,7 +71,7 @@ describe("Auth UseCase", () => {
 
     const promise = sut.auth("any_email@mail.com", "any_password");
 
-    expect(promise).rejects.toThrow(
+    await expect(promise).rejects.toThrow(
       new MissingParamError("loadUserByEmailRepository")
     );
   });
@@ -81,7 +81,7 @@ describe("Auth UseCase", () => {
 
     const promise = sut.auth("any_email@mail.com", "any_password");
 
-    expect(promise).rejects.toThrow(
+    await expect(promise).rejects.toThrow(
       new InvalidParamError("loadUserByEmailRepository")
     );
   });
