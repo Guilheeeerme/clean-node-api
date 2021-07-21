@@ -1,7 +1,7 @@
 module.exports = {
-  isEmailValid = true,
+  isEmailValid: true,
 
   isEmail(email) {
-    return this.isEmailValid
+    return this.isEmailValid;
   },
 };
