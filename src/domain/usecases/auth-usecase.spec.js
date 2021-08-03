@@ -232,6 +232,17 @@ describe("Auth UseCase", () => {
         loadUserByEmailRepository,
         encrypter,
         tokenGenerator: {},
+      }),
+      new AuthUseCase({
+        loadUserByEmailRepository,
+        encrypter,
+        tokenGenerator: makeTokenGenerator(),
+      }),
+      new AuthUseCase({
+        loadUserByEmailRepository,
+        encrypter,
+        tokenGenerator: makeTokenGenerator(),
+        updateAccessTokenRepository: {},
       })
     );
 
