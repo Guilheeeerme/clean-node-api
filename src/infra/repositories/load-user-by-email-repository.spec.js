@@ -66,6 +66,6 @@ describe("LoadUserByEmail Repository", () => {
     const { sut } = makeSut();
     const promise = sut.load();
 
-    await expect(promise).rejects.toThrow("Missing param: email");
+    await expect(promise).rejects.toThrow(new MissingParamError("email"));
   });
 });
